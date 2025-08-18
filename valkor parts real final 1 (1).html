@@ -1,0 +1,1562 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Valkor Auto Parts — Red & Black</title>
+<style>
+/* ==========================
+   VALKOR AUTO PARTS - Single File App
+   Theme: Red (#E50914) & Near-Black (#0B0B0D)
+   No external fonts/libraries. Everything inline.
+   ========================== */
+:root{
+  --red:#E50914;
+  --red-600:#bf0810;
+  --bg:#0B0B0D;
+  --bg-2:#121216;
+  --bg-3:#17171c;
+  --ink:#F5F5F7;
+  --ink-2:#D0D0D4;
+  --muted:#9A9AA1;
+  --ok:#21c55d;
+  --warn:#f59e0b;
+  --bad:#ef4444;
+  --card:#101015;
+  --chip:#1b1b21;
+  --shadow: 0 8px 24px rgba(0,0,0,.35), 0 2px 6px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial;
+  background: linear-gradient(180deg, #0B0B0D 0%, #0e0e12 100%);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+h1,h2,h3{margin:0 0 .35rem}
+h1{font-size:clamp(1.6rem, 1rem + 2vw, 2.4rem)}
+h2{font-size:clamp(1.25rem, .9rem + 1.2vw, 1.6rem)}
+h3{font-size:clamp(1.05rem, .9rem + .8vw, 1.2rem)}
+p{color:var(--ink-2); line-height:1.55}
+a{color:#fff; text-decoration:none}
+a:hover{color:#fff; text-decoration:underline}
+/* Header/Nav */
+.header{
+  position:sticky; top:0; z-index:60;
+  backdrop-filter: blur(8px);
+  background: rgba(11,11,13,.7);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.nav{
+  display:flex; align-items:center; gap:16px;
+  padding:10px 16px; max-width:1200px; margin:0 auto;
+}
+.brand{display:flex; align-items:center; gap:10px; font-weight:700}
+.brand svg{width:34px; height:34px}
+.brand .logo-text{letter-spacing:.5px}
+.nav-links{display:flex; gap:14px; margin-left:auto; align-items:center; flex-wrap:wrap}
+.nav-links a{padding:8px 12px; border-radius:10px; background:transparent}
+.nav-links a.active{background:var(--red); box-shadow:var(--shadow)}
+.hamb{display:none}
+@media(max-width:860px){
+  .nav-links{display:none}
+  .hamb{display:block; margin-left:auto}
+  .mobile-menu{display:none; position:fixed; inset:60px 10px auto 10px; background:var(--bg-2); border:1px solid #222; border-radius:14px; z-index:50; box-shadow:var(--shadow)}
+  .mobile-menu a{display:block; padding:12px 14px; border-bottom:1px solid #1f1f25}
+  .mobile-menu a:last-child{border-bottom:0}
+}
+/* Layout */
+.container{max-width:1200px; margin:0 auto; padding:18px 16px}
+.grid{display:grid; gap:16px}
+.col-2{grid-template-columns:280px 1fr}
+@media(max-width:980px){ .col-2{grid-template-columns:1fr} }
+.card{
+  background:linear-gradient(180deg, #121216, #0f0f13);
+  border:1px solid #1b1b22; border-radius:14px; padding:14px; box-shadow:var(--shadow);
+}
+.soft{border-radius:18px}
+.shadow{box-shadow:var(--shadow)}
+.muted{color:var(--muted)}
+.badge{display:inline-flex; align-items:center; gap:6px; background:var(--chip); color:#fff; border:1px solid #24242c; padding:6px 8px; border-radius:999px; font-size:.9rem}
+.chips{display:flex; gap:8px; flex-wrap:wrap}
+.btn{display:inline-flex; align-items:center; gap:8px; background:var(--red); border:0; color:#fff; padding:10px 12px; border-radius:12px; cursor:pointer; font-weight:600; box-shadow:var(--shadow); transition:transform .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.secondary{background:transparent; border:1px solid #2a2a33; color:#fff}
+.btn.ghost{background:transparent; border:0; color:#fff; opacity:.85}
+.icon-btn{display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:10px; background:#1a1a20; border:1px solid #24242c; cursor:pointer}
+.input, select{width:100%; background:#101017; border:1px solid #24242c; color:#fff; padding:10px 12px; border-radius:10px; outline:0}
+label{display:block; font-size:.92rem; color:var(--ink-2); margin:10px 0 6px}
+.small{font-size:.9rem}
+.kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background:#1a1a20; padding:2px 6px; border-radius:6px; border:1px solid #2d2d36}
+/* Hero */
+.hero{
+  background: radial-gradient(1200px 400px at 50% -20%, rgba(229,9,20,.25), transparent), linear-gradient(180deg, #0B0B0D, #0e0e12);
+  padding:42px 16px 24px;
+  border-bottom:1px solid #1b1b22;
+}
+.hero-wrap{max-width:1200px; margin:0 auto; display:grid; gap:16px; grid-template-columns:1.1fr .9fr}
+.hero .title{font-weight:800; line-height:1.1}
+.hero p{margin:8px 0 16px}
+.hero .searchbar{display:grid; grid-template-columns:1fr 120px; gap:10px}
+@media(max-width:980px){ .hero-wrap{grid-template-columns:1fr} .hero .searchbar{grid-template-columns:1fr} }
+/* Sidebar filters */
+.sidebar .section{margin-bottom:14px}
+.filter-row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+@media(max-width:520px){ .filter-row{grid-template-columns:1fr} }
+.range{display:flex; gap:10px}
+.chip{padding:6px 10px; border-radius:999px; background:#1a1a20; border:1px solid #24242c; display:inline-flex; gap:6px; align-items:center}
+.chip button{all:unset; cursor:pointer}
+/* Results grid */
+.results-head{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin:6px 0 8px}
+.grid-parts{display:grid; grid-template-columns:repeat(4, 1fr); gap:12px}
+@media(max-width:1100px){ .grid-parts{grid-template-columns:repeat(3,1fr)} }
+@media(max-width:860px){ .grid-parts{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:560px){ .grid-parts{grid-template-columns:1fr} }
+.part-card{display:flex; flex-direction:column; gap:8px; border-radius:14px; overflow:hidden; border:1px solid #22232b; background:#0F0F14}
+.part-img{height:150px; background:#16161c; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #1f1f27}
+.part-body{padding:10px 12px; display:grid; gap:6px}
+.meta{display:flex; gap:8px; flex-wrap:wrap}
+.meta .item{background:#15151b; border:1px solid #24242c; padding:4px 6px; border-radius:8px; font-size:.85rem}
+.price{font-weight:800}
+/* Suppliers list */
+.grid-sup{display:grid; grid-template-columns:repeat(3, 1fr); gap:12px}
+@media(max-width:1000px){ .grid-sup{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:640px){ .grid-sup{grid-template-columns:1fr} }
+.sup-card{display:grid; gap:8px; border:1px solid #222; border-radius:14px; background:#0f0f14; padding:12px}
+.sup-card .line{display:flex; gap:8px; align-items:center; justify-content:space-between}
+/* Pagination */
+.pager{display:flex; gap:8px; align-items:center; justify-content:center; margin:12px 0}
+.pager button{padding:8px 10px}
+/* Modal (Supplier Window) */
+.modal-backdrop{position:fixed; inset:0; background:rgba(0,0,0,.6); display:flex; align-items:center; justify-content:center; z-index:100; opacity:0; pointer-events:none; transition:opacity .2s}
+.modal-backdrop.show{opacity:1; pointer-events:auto}
+.modal{background:#0e0e13; width:min(920px, 92vw); max-height:90vh; overflow:auto; border:1px solid #23232b; border-radius:14px; box-shadow:var(--shadow); outline:0}
+.modal-header{display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #1d1d25; position:sticky; top:0; background:#0e0e13; z-index:2}
+.modal-tabs{display:flex; gap:6px; padding:8px; border-bottom:1px solid #1d1d25; position:sticky; top:46px; background:#0e0e13; z-index:1}
+.modal-tabs button{padding:8px 10px; border-radius:10px; border:1px solid #24242c; background:#14141a; color:#fff}
+.modal-body{padding:12px; display:grid; gap:10px}
+/* Drawer (mobile filters) */
+.drawer{position:fixed; right:0; top:0; height:100%; width:min(92vw, 360px); transform:translateX(100%); transition:transform .25s; background:#0e0e13; border-left:1px solid #1e1e26; z-index:90; overflow:auto}
+.drawer.show{transform:translateX(0)}
+/* Loading / skeleton */
+.progress{height:6px; background:#1f1f27; border-radius:999px; overflow:hidden; border:1px solid #272732}
+.progress div{height:100%; width:0%; background:linear-gradient(90deg, var(--red), #ff3b30); transition:width .2s}
+.skel{background:linear-gradient(90deg,#181820,#1c1c26,#181820); height:150px; border-radius:12px; animation:shimmer 1.1s infinite; border:1px solid #23232b}
+@keyframes shimmer{0%{background-position:-150% 0} 100%{background-position:150% 0}}
+/* Footer */
+.footer{padding:20px 16px; border-top:1px solid #1b1b22; background:#0b0b0d; color:var(--muted)}
+.footer .row{max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between}
+/* Dev Tools */
+.devpanel{position:fixed; bottom:14px; right:14px; background:#0f0f14; border:1px solid #24242c; border-radius:14px; padding:10px; box-shadow:var(--shadow); width:min(380px, 94vw); display:none; z-index:80}
+.devpanel.show{display:block}
+.devpanel pre{white-space:pre-wrap; max-height:160px; overflow:auto; background:#0b0b0f; padding:8px; border-radius:10px; border:1px solid #23232b}
+/* Alerts/Toast */
+.toast{position:fixed; bottom:80px; left:50%; transform:translateX(-50%); background:#16161e; color:#fff; border:1px solid #2a2a33; padding:10px 12px; border-radius:12px; box-shadow:var(--shadow); display:none; z-index:95}
+.toast.show{display:block}
+/* Breadcrumbs */
+.breadcrumbs{display:flex; gap:6px; flex-wrap:wrap; color:var(--muted); font-size:.92rem}
+/* Accordions */
+.acc{border:1px solid #23232b; border-radius:12px; overflow:hidden}
+.acc-item{border-top:1px solid #23232b}
+.acc-item:first-child{border-top:0}
+.acc-btn{width:100%; text-align:left; padding:12px; background:#12121a; color:#fff; border:0}
+.acc-panel{padding:12px; display:none; background:#0f0f14}
+.acc-item.open .acc-panel{display:block}
+/* Fatal fallback */
+.fatal{max-width:760px; margin:48px auto; background:#130c0d; border:1px solid #3a1518; border-radius:14px; padding:18px}
+/* Focus ring */
+:focus-visible{outline:2px solid var(--red-600); outline-offset:2px}
+/* Animations respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .btn, .modal-backdrop, .drawer{transition:none !important}
+}
+
+/* === Presentation window (non-invasive addition) === */
+.presentation{border-bottom:1px solid #1b1b22;background: radial-gradient(1200px 400px at 50% -30%, rgba(229,9,20,.20), transparent);}
+.present-wrap{max-width:1200px;margin:0 auto;padding:16px}
+.present-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.present-title{font-weight:800}
+.present-window{position:relative;width:100%;aspect-ratio:16/9;border:1px solid #23232b;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#0f0f14}
+.present-window iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0b0b0d}
+.present-overlay{position:absolute;inset:auto 8px 8px 8px;display:flex;gap:8px;align-items:center;justify-content:space-between}
+.present-chip{padding:6px 10px;border-radius:999px;background:#1a1a20;border:1px solid #24242c;display:inline-flex;gap:6px;align-items:center}
+.present-note{color:var(--muted);font-size:.9rem}
+
+</style>
+</head>
+<body>
+  <div id="app">
+    <div class="header">
+      <div class="nav">
+        <div class="brand" aria-label="Valkor">
+          <!-- Inline SVG Valkor mark -->
+          <svg viewBox="0 0 100 100" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="g" x1="0" x2="1">
+                <stop offset="0" stop-color="#E50914"/><stop offset="1" stop-color="#ff3b30"/>
+              </linearGradient>
+            </defs>
+            <path d="M10 80 L42 20 L50 20 L30 80 Z" fill="url(#g)"/>
+            <path d="M58 20 L90 80 L70 80 L50 38 Z" fill="url(#g)"/>
+          </svg>
+          <div class="logo-text">Valkor Auto Parts</div>
+        </div>
+        <div class="nav-links" aria-label="Primary">
+          <a href="#home" data-link>Home</a>
+          <a href="#browse" data-link>Browse Parts</a>
+          <a href="#suppliers" data-link>Suppliers</a>
+          <a href="#sell" data-link>Sell on Valkor</a>
+          <a href="#cart" data-link>Cart</a>
+          <a href="#help" data-link>Help</a>
+          <a href="#admin" data-link class="badge" title="Demo admin">Admin</a>
+        </div>
+        <button class="icon-btn hamb" id="hamb" aria-label="Menu" aria-controls="mmenu" aria-expanded="false">☰</button>
+      </div>
+      <div id="mmenu" class="mobile-menu" role="menu" aria-label="Mobile Navigation">
+        <a href="#home">Home</a>
+        <a href="#browse">Browse Parts</a>
+        <a href="#suppliers">Suppliers</a>
+        <a href="#sell">Sell on Valkor</a>
+        <a href="#cart">Cart</a>
+        <a href="#portal">Portal</a>
+        <a href="#help">Help</a>
+        <a href="#admin">Admin</a>
+      </div>
+    </div>
+
+    
+    <!-- Presentation Window (added at the very start; layout unchanged elsewhere) -->
+    <section class="presentation" aria-label="Vault Core Parts Presentation">
+      <div class="present-wrap">
+        <div class="present-head">
+          <div class="present-title"><h2>Vault Core Parts — Overview Presentation</h2></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="present-chip">Embedded</span>
+            <span class="present-chip">Auto-scroll</span>
+          </div>
+        </div>
+        <div class="present-window" id="vpWindow">
+          <iframe id="vpFrame" title="Vault Core Parts Presentation"
+            src="https://valkor-auto-parts-dyzbh29.gamma.site/#"
+            allow="clipboard-read; clipboard-write; fullscreen; autoplay"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <div class="present-overlay">
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn secondary" id="vpToggle" aria-pressed="true">Auto-scroll: On</button>
+              <button class="btn secondary" id="vpRetry">Retry</button>
+            </div>
+            <div class="present-note" id="vpNote">If the presentation doesn’t move, the host may limit scripted scrolling in embeds.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="hero-wrap">
+        <div>
+          <div class="title"><h1>Find Any Vehicle Part. Anytime. Anywhere.</h1></div>
+          <p class="muted">Search by VIN, chassis, or vehicle details across 10,000+ parts from 1,500+ GCC suppliers (shipping to Iran supported).</p>
+          <div class="searchbar">
+            <input id="heroSearch" class="input" placeholder="Search by part title, make, model, or VIN (17 chars)…" aria-label="Global search">
+            <button class="btn" id="heroGo">Search</button>
+          </div>
+          <div class="chips" id="vinChipWrap" style="margin-top:10px"></div>
+        </div>
+        <div class="card">
+          <h3>Generating Marketplace Data…</h3>
+          <p class="small">We build a reproducible demo dataset locally (no network). This prevents blank pages and guarantees speed.</p>
+          <div class="progress" aria-label="Loading progress"><div id="progBar"></div></div>
+          <div id="genMeta" class="small muted" style="margin-top:8px">Starting…</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px">
+            <div class="skel"></div><div class="skel"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main id="view" class="container">
+      <!-- Routed content mounts here -->
+    </main>
+
+    <div class="footer">
+      <div class="row">
+        <div>© <span id="year"></span> Valkor. Red & Black. All client-side demo.</div>
+        <div class="chips">
+          <span class="chip">Seed: <span id="seedRead"></span></span>
+          <button class="btn secondary" id="toggleDev">Dev Tools</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dev Tools Panel -->
+    <div class="devpanel" id="devPanel" aria-live="polite">
+      <h3>Dev Tools</h3>
+      <div class="chips" style="margin:6px 0 8px">
+        <span class="chip">Seed: <span id="devSeed"></span></span>
+        <span class="chip">Suppliers: <span id="devSup"></span></span>
+        <span class="chip">Parts: <span id="devParts"></span></span>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap">
+        <input id="seedInput" class="input" style="max-width:180px" placeholder="Change seed">
+        <button class="btn" id="regen">Regenerate Dataset</button>
+        <button class="btn secondary" id="dump">Dump Filters JSON</button>
+      </div>
+      <h4 style="margin-top:10px">Last Errors</h4>
+      <pre id="errLog">(empty)</pre>
+    </div>
+
+    <!-- Global Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- Drawer for mobile filters -->
+    <div class="drawer" id="drawer" aria-hidden="true" aria-label="Filters">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center">
+          <h3>Filters</h3>
+          <button class="icon-btn" id="drawerClose" aria-label="Close filters">✕</button>
+        </div>
+        <div id="drawerFilters"></div>
+      </div>
+    </div>
+
+    <!-- Modal Backdrop / Supplier Window -->
+    <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+        <div class="modal-header">
+          <h3 id="modalTitle">Supplier</h3>
+          <div style="display:flex; gap:8px">
+            <button class="icon-btn" id="modalClose" aria-label="Close">✕</button>
+          </div>
+        </div>
+        <div class="modal-tabs" id="modalTabs"></div>
+        <div class="modal-body" id="modalBody"></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* ===========================================================
+   Valkor Auto Parts — Single-file App
+   Sections:
+   1) Global Error Guard
+   2) Seeded RNG & Deterministic Generators
+   3) Dataset (Suppliers + Parts) generation (batched)
+   4) State, Router, and Persistence
+   5) Filters UI (desktop + mobile)
+   6) VIN validation and decode (simulated)
+   7) Browse Parts (pagination, sorting)
+   8) Suppliers Directory + Supplier Modal (window)
+   9) Cart & Checkout (mock)
+   10) Portals: Customer/Supplier; Admin (analytics)
+   11) Utilities: CSV/JSON export, toasts, dev panel
+   12) Accessibility: focus trap
+   =========================================================== */
+(function(){
+  'use strict';
+
+  /* 1) Global Error Guard */
+  const errorLog = [];
+  window.onerror = function(message, src, line, col, err){
+    recordError(message || (err && err.message));
+    showFatal(message || 'Unknown error');
+    return true;
+  };
+  window.onunhandledrejection = function(e){
+    recordError('Promise: ' + (e && e.reason && (e.reason.message || e.reason) || 'unknown'));
+    showFatal('Unexpected issue occurred.');
+    return true;
+  };
+  function recordError(msg){
+    try{ errorLog.push(String(msg)); updateErrLog(); }catch(_){}
+  }
+  function showFatal(msg){
+    const app = document.getElementById('app');
+    if(!app) return;
+    app.querySelector('#view').innerHTML = '';
+    const fallback = document.createElement('div');
+    fallback.className = 'fatal';
+    fallback.innerHTML = '<h1>Something went wrong</h1><p>'+escapeHtml(msg)+'</p><button class="btn" id="fatalReload">Reload</button><pre>'+escapeHtml(errorLog.slice(-8).join('\\n'))+'</pre>';
+    app.querySelector('#view').appendChild(fallback);
+    const btn = document.getElementById('fatalReload');
+    if(btn) btn.onclick = ()=>location.reload();
+  }
+  function updateErrLog(){
+    const el = document.getElementById('errLog');
+    if(el) el.textContent = errorLog.slice(-12).join('\\n') || '(empty)';
+  }
+
+  /* 2) Seeded RNG & Deterministic Generators */
+  function mulberry32(a){ return function(){ var t=a+=0x6D2B79F5; t=Math.imul(t^t>>>15,1|t); t^=t+Math.imul(t^t>>>7,61|t); return ((t^t>>>14)>>>0)/4294967296; } }
+  const rand = {
+    rng: mulberry32(Number(localStorage.getItem('valkor_seed')) || 246813579),
+    reseed(seed){
+      if(!Number.isFinite(seed)) seed = 246813579;
+      this.rng = mulberry32(seed>>>0);
+      state.seed = seed>>>0;
+      localStorage.setItem('valkor_seed', state.seed);
+    },
+    f(){ return this.rng(); },
+    int(min, max){ return Math.floor(this.f()*(max-min+1))+min; },
+    pick(arr){ return arr[Math.floor(this.f()*arr.length)]; },
+    bool(p=0.5){ return this.f() < p; },
+    choiceWeighted(choices){ // [{v, w}]
+      const sum = choices.reduce((a,c)=>a+c.w,0);
+      let r = this.f()*sum;
+      for(const c of choices){ if((r-=c.w)<=0) return c.v; }
+      return choices[choices.length-1].v;
+    }
+  };
+
+  /* 3) Dataset Generation (batched to avoid jank) */
+  const GCC_COUNTRIES = ['United Arab Emirates','Saudi Arabia','Kuwait','Qatar','Bahrain','Oman'];
+  const COUNTRY_CODES = { 'United Arab Emirates':'UAE', 'Saudi Arabia':'KSA', 'Kuwait':'Kuwait', 'Qatar':'Qatar', 'Bahrain':'Bahrain', 'Oman':'Oman' };
+  const CITIES = {
+    'United Arab Emirates':['Dubai','Abu Dhabi','Sharjah','Ajman','Ras Al Khaimah','Fujairah'],
+    'Saudi Arabia':['Riyadh','Jeddah','Dammam','Khobar','Mecca','Medina'],
+    'Kuwait':['Kuwait City','Hawally','Farwaniya'],
+    'Qatar':['Doha','Al Wakrah','Al Khor'],
+    'Bahrain':['Manama','Riffa','Muharraq'],
+    'Oman':['Muscat','Sohar','Salalah'],
+  };
+  const CATEGORIES = ['body','engine','suspension','electronics','interior','wheels/tires','offroad','performance'];
+  const VEHICLE_TYPES = ['car','bike','truck','ATV','marine'];
+  const PRICE_LEVELS = ['$', '$$', '$$$'];
+  const PAYMENT_METHODS = ['Visa','Mastercard','COD','Bank Transfer'];
+  const CONDITIONS = ['new','oem','refurb','used'];
+  const MAKES = ['Toyota','Nissan','Honda','Hyundai','Kia','Ford','Chevrolet','BMW','Mercedes','Audi','Volkswagen','Mitsubishi','Lexus','Mazda','Jeep','Land Rover','Porsche','Dodge','GMC','Suzuki','Yamaha','Kawasaki','Can-Am','Polaris','Sea-Doo','CFMoto','Volvo','Scania','MAN','Isuzu','Hino'];
+  const MODELS = ['Sport','LX','EX','GT','Pro','XR','Touring','Avant','Classic','Prime','Ultra','R','S','X','Z'];
+
+  const state = {
+    seed: Number(localStorage.getItem('valkor_seed')) || 246813579,
+    suppliers: [],           // { supplierId, name, country, city, ... , parts:[partId,...] }
+    parts: [],               // { partId, supplierId, title, ... }
+    indexSupById: Object.create(null),
+    indexPartsById: Object.create(null),
+    cart: JSON.parse(localStorage.getItem('valkor_cart')||'[]'),
+    filters: JSON.parse(localStorage.getItem('valkor_filters')||'{}'),
+    lastRoute: '#home',
+  };
+  rand.reseed(state.seed);
+
+  function saveCart(){ localStorage.setItem('valkor_cart', JSON.stringify(state.cart)); }
+  function saveFilters(){ localStorage.setItem('valkor_filters', JSON.stringify(state.filters)); }
+
+  // Name generator (synthetic, not real brands)
+  const syllA = ['Val','Kor','Tek','Rav','Dyn','Mon','Fer','Zen','Lux','Tri','Arv','Nov','Kyl','Zor','Arg','Vel','Tor','Rad','Gry','Ax'];
+  const syllB = ['-','o','a','e','u','','i'];
+  const syllC = ['tron','max','sys','ware','matic','craft','parts','auto','line','forge','pro','works','tronics','haus','dyn','labs','core','flux'];
+  function genName(){
+    const a = rand.pick(syllA), b = rand.pick(syllB), c = rand.pick(syllC);
+    const suffix = rand.pick([' Trading',' Auto Parts',' Industries',' Supplies',' Group',' LLC',' Co.',' FZ-LLC']);
+    return (a + b + c + suffix).replace('--','-');
+  }
+
+  function randEmail(base){ return base.toLowerCase().replace(/[^a-z0-9]/g,'') + '@' + rand.pick(['valmail.com','meko.ae','gearhub.cc','partix.co']); }
+  function randPhone(country){
+    const cc = { 'United Arab Emirates':'+971','Saudi Arabia':'+966','Kuwait':'+965','Qatar':'+974','Bahrain':'+973','Oman':'+968' }[country] || '+971';
+    return cc + ' ' + rand.int(50,58) + rand.int(1000000, 9999999);
+  }
+  function randDateRecent(){
+    const now = Date.now(); const days = rand.int(0, 120);
+    const d = new Date(now - days*86400000);
+    return d.toISOString().slice(0,10);
+  }
+  function randDeliveryRange(){
+    const a = rand.int(1,5), b = a + rand.int(0,7);
+    return a+'-'+b+' days';
+  }
+  function randAddress(city){ return rand.int(10,9999)+' '+city+' Industrial Area, Zone '+rand.int(1,30); }
+  let __supInc = 1, __partInc = 1;
+
+  function makeSupplier(){
+    const country = rand.pick(GCC_COUNTRIES);
+    const city = rand.pick(CITIES[country]);
+    const name = genName();
+    const supplierId = 'SUP' + String(__supInc++).padStart(5,'0');
+    const rating = Math.round((rand.f()*4+1)*10)/10; // 1.0 to 5.0
+    const yearsActive = rand.int(1,35);
+    const catCount = rand.int(3,6);
+    const categories = Array.from(new Set(Array.from({length:catCount},()=>rand.pick(CATEGORIES))));
+    const paymentMethods = Array.from(new Set(Array.from({length:rand.int(2,4)},()=>rand.pick(PAYMENT_METHODS))));
+    const priceLevel = rand.pick(PRICE_LEVELS);
+    const returnsPolicy = rand.pick([
+      '7-day return; buyer pays shipping','14-day return; restocking fee may apply','No returns on electrical parts','30-day hassle-free returns','Exchange only within 15 days'
+    ]);
+    const minOrder = rand.int(0,500);
+    const shipTo = ['UAE','KSA','Kuwait','Qatar','Bahrain','Oman','Iran']; // shipping to Iran allowed
+    const sup = {
+      supplierId, name, country, city,
+      address: randAddress(city),
+      contactEmail: randEmail(name.split(' ')[0]),
+      phone: randPhone(country),
+      rating, yearsActive,
+      deliveryEtaDays: randDeliveryRange(),
+      shipTo, categories, priceLevel,
+      returnsPolicy, minOrder,
+      paymentMethods, lastUpdated: randDateRecent(),
+      parts: []
+    };
+    state.indexSupById[supplierId] = sup;
+    return sup;
+  }
+
+  function svgDataUrl(text, w=360, h=200){
+    const bg = '#14141a', fg = '#E50914';
+    const svg =
+`<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}'>
+  <defs>
+    <linearGradient id='g' x1='0' x2='1'>
+      <stop offset='0' stop-color='${fg}'/><stop offset='1' stop-color='#ff3b30'/>
+    </linearGradient>
+    <pattern id='p' width='8' height='8' patternUnits='userSpaceOnUse' patternTransform='rotate(45)'>
+      <rect width='8' height='8' fill='${bg}'/>
+      <rect width='4' height='8' fill='rgba(255,255,255,0.03)'/>
+    </pattern>
+  </defs>
+  <rect width='100%' height='100%' fill='url(#p)'/>
+  <rect x='8' y='8' width='${w-16}' height='${h-16}' rx='12' fill='${bg}' stroke='#23232b'/>
+  <text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='system-ui' font-size='22' opacity='0.9'>${text}</text>
+  <rect x='12' y='12' width='120' height='18' rx='9' fill='url(#g)'/>
+</svg>`;
+    return 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
+  }
+
+  function makePart(sup){
+    const vehicleType = rand.pick(VEHICLE_TYPES);
+    const make = rand.pick(MAKES);
+    const model = rand.pick(MODELS);
+    const y1 = rand.int(1998, 2022);
+    const y2 = y1 + rand.int(0, 7);
+    const condition = rand.pick(CONDITIONS);
+    const stock = rand.int(0,500);
+    const priceAED = Math.round((rand.f()*1800 + 100) * (condition==='oem'?1.25:1));
+    const warranty = rand.int(0, 36);
+    const leadTimeDays = rand.int(0, 14);
+    const title = rand.pick(['Brake Kit','Suspension Arm','ECU Module','LED Headlamp','Turbocharger','Timing Belt','Fuel Pump','Radiator','Clutch Kit','Ignition Coil','Starter Motor','Alternator','Shock Absorber','Oil Filter','Air Intake','Exhaust','Spark Plug Set','Steering Rack','Wheel Bearing','Throttle Body']) + ' — ' + make + ' ' + model;
+    const partId = 'PAR' + String(__partInc++).padStart(6,'0');
+    const images = [svgDataUrl('Part • '+make)];
+    const p = {
+      partId, supplierId: sup.supplierId, title, vehicleType, make, model, yearRange: [y1,y2],
+      oemCompatible: rand.bool(0.6), condition, stock, priceAED, images, warranty, leadTimeDays
+    };
+    state.indexPartsById[partId] = p;
+    return p;
+  }
+
+  function generateDataset(targetSuppliers=1500, minParts=10000){
+    return new Promise((resolve)=>{
+      state.suppliers.length=0; state.parts.length=0;
+      state.indexSupById = Object.create(null);
+      state.indexPartsById = Object.create(null);
+      __supInc=1; __partInc=1;
+      const prog = document.getElementById('progBar');
+      const meta = document.getElementById('genMeta');
+      const batch = 75;
+      let madeSup=0;
+      function step(){
+        const end = Math.min(madeSup+batch, targetSuppliers);
+        for(let i=madeSup;i<end;i++){
+          const sup = makeSupplier();
+          state.suppliers.push(sup);
+          const np = rand.int(3,10);
+          for(let j=0;j<np;j++){
+            const p = makePart(sup);
+            state.parts.push(p);
+            sup.parts.push(p.partId);
+          }
+        }
+        madeSup=end;
+        const per = Math.round((madeSup/targetSuppliers)*100);
+        if(prog) prog.style.width = per+'%';
+        if(meta) meta.textContent = 'Suppliers: '+madeSup+' / '+targetSuppliers+' • Parts: '+state.parts.length;
+        if(madeSup<targetSuppliers){
+          requestAnimationFrame(step);
+        } else {
+          // top-up parts if below minParts
+          while(state.parts.length < minParts){
+            const s = rand.pick(state.suppliers);
+            const p = makePart(s);
+            state.parts.push(p);
+            s.parts.push(p.partId);
+          }
+          if(meta) meta.textContent += ' • Finalizing…';
+          setTimeout(()=>resolve(), 0);
+        }
+      }
+      step();
+    });
+  }
+
+  /* 4) State, Router, and Persistence */
+  function $(sel, root=document){ return root.querySelector(sel); }
+  function $all(sel, root=document){ return Array.from(root.querySelectorAll(sel)); }
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+  function fmtAED(n){ return new Intl.NumberFormat('en-AE',{style:'currency', currency:'AED', maximumFractionDigits:0}).format(n); }
+  function byHash(){
+    let h = location.hash || '#home';
+    if(!/^#(home|browse|suppliers|sell|cart|portal|help|admin)(\\b|\\?)/.test(h)) h = '#home';
+    return h;
+  }
+  function setActiveNav(){
+    const h = byHash().split('?')[0];
+    $all('.nav-links a').forEach(a=>{
+      if(a.getAttribute('href')===h) a.classList.add('active'); else a.classList.remove('active');
+    });
+  }
+  function parseHashQuery(){
+    const h = location.hash;
+    const idx = h.indexOf('?');
+    const q = {};
+    if(idx>-1){
+      new URLSearchParams(h.slice(idx+1)).forEach((v,k)=>q[k]=v);
+    }
+    return q;
+  }
+  function updateHashWithFilters(route, filters){
+    const params = new URLSearchParams();
+    for(const [k,v] of Object.entries(filters)){
+      if(v===undefined || v===null || v==='' || (Array.isArray(v)&&!v.length)) continue;
+      params.set(k, typeof v==='object'? JSON.stringify(v): String(v));
+    }
+    const newHash = route + (params.toString()?('?'+params.toString()):'');
+    if(location.hash !== newHash) location.hash = newHash;
+  }
+
+  // Simple view router
+  async function router(){
+    try{
+      setActiveNav();
+      const view = $('#view');
+      const route = byHash();
+      state.lastRoute = route;
+      if(route.startsWith('#home')) return renderHome(view);
+      if(route.startsWith('#browse')) return renderBrowse(view);
+      if(route.startsWith('#suppliers')) return renderSuppliers(view);
+      if(route.startsWith('#sell')) return renderSell(view);
+      if(route.startsWith('#cart')) return renderCart(view);
+      if(route.startsWith('#portal')) return renderPortal(view);
+      if(route.startsWith('#help')) return renderHelp(view);
+      if(route.startsWith('#admin')) return renderAdmin(view);
+    }catch(e){ recordError(e); showFatal(e.message||String(e)); }
+  }
+
+  /* 5) Filters UI */
+  const VIN_ALLOWED = /^[A-HJ-NPR-Z0-9]{17}$/; // excludes I,O,Q
+  function filterPanelHTML(scope='browse'){
+    const f = state.filters || {};
+    const mk = escapeHtml(f.make||''), md = escapeHtml(f.model||'');
+    return `
+    <div class="section">
+      <label>VIN <span class="muted">(17 chars; no I, O, Q)</span></label>
+      <input class="input" id="${scope}-vin" value="${escapeHtml(f.vin||'')}" maxlength="17" placeholder="e.g., JTDKB20U793123456">
+      <div class="chips" id="${scope}-vinChips"></div>
+    </div>
+    <div class="section">
+      <label>Chassis #</label>
+      <input class="input" id="${scope}-chassis" value="${escapeHtml(f.chassis||'')}" placeholder="Optional">
+    </div>
+    <div class="section filter-row">
+      <div><label>Make</label><input class="input" id="${scope}-make" value="${mk}" placeholder="e.g., Toyota"></div>
+      <div><label>Model</label><input class="input" id="${scope}-model" value="${md}" placeholder="e.g., Sport"></div>
+    </div>
+    <div class="section filter-row">
+      <div><label>Year</label><input class="input" id="${scope}-year" value="${escapeHtml(f.year||'')}" placeholder="e.g., 2015"></div>
+      <div><label>Vehicle Type</label>
+        <select id="${scope}-vtype">
+          <option value="">Any</option>${VEHICLE_TYPES.map(v=>`<option ${f.vehicleType===v?'selected':''}>${v}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="section filter-row">
+      <div><label>Category</label>
+        <select id="${scope}-cat">
+          <option value="">Any</option>${CATEGORIES.map(c=>`<option ${f.category===c?'selected':''}>${c}</option>`).join('')}
+        </select>
+      </div>
+      <div><label>Condition</label>
+        <select id="${scope}-cond">
+          <option value="">Any</option>${CONDITIONS.map(c=>`<option ${f.condition===c?'selected':''}>${c}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="section filter-row">
+      <div><label>Country</label>
+        <select id="${scope}-country">
+          <option value="">Any</option>${GCC_COUNTRIES.map(c=>`<option ${f.country===c?'selected':''}>${c}</option>`).join('')}
+        </select>
+      </div>
+      <div><label>City</label><input class="input" id="${scope}-city" value="${escapeHtml(f.city||'')}" placeholder="e.g., Dubai"></div>
+    </div>
+    <div class="section">
+      <label>Price (AED)</label>
+      <div class="range">
+        <input class="input" id="${scope}-pmin" value="${escapeHtml(f.pmin??'')}" placeholder="Min">
+        <input class="input" id="${scope}-pmax" value="${escapeHtml(f.pmax??'')}" placeholder="Max">
+      </div>
+    </div>
+    <div class="section filter-row">
+      <div><label>Supplier Rating (min)</label><input class="input" id="${scope}-rating" value="${escapeHtml(f.rating??'')}" placeholder="e.g., 4"></div>
+      <div><label>Delivery ETA (max days)</label><input class="input" id="${scope}-eta" value="${escapeHtml(f.eta??'')}" placeholder="e.g., 5"></div>
+    </div>
+    <div class="section filter-row">
+      <div><label>Payment Method</label>
+        <select id="${scope}-pay">
+          <option value="">Any</option>${PAYMENT_METHODS.map(p=>`<option ${f.payment===p?'selected':''}>${p}</option>`).join('')}
+        </select>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; margin-top:24px">
+        <input type="checkbox" id="${scope}-instock" ${f.instock?'checked':''}><label for="${scope}-instock" style="margin:0">In stock only</label>
+      </div>
+    </div>
+    <div class="chips" id="${scope}-activeChips"></div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
+      <button class="btn" id="${scope}-apply">Apply Filters</button>
+      <button class="btn secondary" id="${scope}-clear">Clear All</button>
+      <button class="btn secondary" id="${scope}-export">Export CSV</button>
+      <button class="btn secondary" id="${scope}-exportjson">Export JSON</button>
+    </div>`;
+  }
+
+  function readFilters(scope){
+    const f = Object.assign({}, state.filters);
+    function gv(id){ const el = $('#'+scope+'-'+id); return el?el.value.trim():''; }
+    f.vin = gv('vin').toUpperCase();
+    f.chassis = gv('chassis');
+    f.make = gv('make'); f.model = gv('model');
+    f.year = gv('year'); f.vehicleType = gv('vtype') || '';
+    f.category = gv('cat') || ''; f.condition = gv('cond') || '';
+    f.country = gv('country') || ''; f.city = gv('city');
+    const pmin = gv('pmin'), pmax = gv('pmax');
+    f.pmin = pmin? Number(pmin): ''; f.pmax = pmax? Number(pmax): '';
+    f.rating = gv('rating')? Number(gv('rating')): ''; f.eta = gv('eta')? Number(gv('eta')): '';
+    f.payment = gv('pay') || ''; f.instock = $('#'+scope+'-instock')?.checked || false;
+    // cleanup NaN
+    if(Number.isNaN(f.pmin)) f.pmin=''; if(Number.isNaN(f.pmax)) f.pmax='';
+    if(Number.isNaN(f.rating)) f.rating=''; if(Number.isNaN(f.eta)) f.eta='';
+    return f;
+  }
+
+  function applyFiltersToParts(parts, f){
+    return parts.filter(p=>{
+      const sup = state.indexSupById[p.supplierId];
+      if(f.make && p.make.toLowerCase().indexOf(f.make.toLowerCase())===-1) return false;
+      if(f.model && p.model.toLowerCase().indexOf(f.model.toLowerCase())===-1) return false;
+      if(f.year){
+        const y = Number(f.year)||0; const [a,b]=p.yearRange; if(!(y>=a && y<=b)) return false;
+      }
+      if(f.vehicleType && p.vehicleType!==f.vehicleType) return false;
+      if(f.category && !sup.categories.includes(f.category)) return false;
+      if(f.condition && p.condition!==f.condition) return false;
+      if(f.country && sup.country!==f.country) return false;
+      if(f.city && sup.city.toLowerCase().indexOf(f.city.toLowerCase())===-1) return false;
+      if(f.pmin!=='' && p.priceAED < f.pmin) return false;
+      if(f.pmax!=='' && p.priceAED > f.pmax) return false;
+      if(f.rating!=='' && sup.rating < f.rating) return false;
+      if(f.eta!==''){
+        // parse sup.deliveryEtaDays like "2-5 days" => 5 (max)
+        const m = /(\d+)\-(\d+)/.exec(sup.deliveryEtaDays); const max = m? Number(m[2]): 7;
+        if(max > f.eta) return false;
+      }
+      if(f.payment && !sup.paymentMethods.includes(f.payment)) return false;
+      if(f.instock && p.stock<=0) return false;
+      // VIN search: if VIN exists and valid, prioritize matching make/year; not strict filter (we already prefilled)
+      return true;
+    });
+  }
+  function activeFilterChipsHTML(f){
+    const chips = [];
+    for(const [k,v] of Object.entries(f)){
+      if(!v || (Array.isArray(v)&&!v.length) || (typeof v==='boolean' && v===false)) continue;
+      if(k==='vin' || k==='chassis') continue; // show VIN chips elsewhere
+      chips.push(`<span class="chip" data-k="${k}">${escapeHtml(k)}: <b>${escapeHtml(String(v))}</b> <button aria-label="Remove filter">✕</button></span>`);
+    }
+    return chips.join('') || '<span class="muted small">No active filters</span>';
+  }
+
+  /* 6) VIN validation & decoding (simulated) */
+  function vinDecode(vin){
+    // If valid, infer make and approximate year/region deterministically from chars
+    if(!VIN_ALLOWED.test(vin)) return null;
+    // Use 10th char (year code) approximate
+    const yearMap = 'ABCDEFGHJKLMNPRSTVWXY123456789'; // typical VIN year characters
+    const ch = vin[9];
+    let yearBase = 2000 + (yearMap.indexOf(ch) % 25);
+    yearBase = Math.max(1998, Math.min(2024, yearBase));
+    const make = MAKES[ (vin.charCodeAt(0)+vin.charCodeAt(3)+vin.charCodeAt(6)) % MAKES.length ];
+    const model = MODELS[ (vin.charCodeAt(2)+vin.charCodeAt(5)) % MODELS.length ];
+    const region = (()=>{
+      const c = vin[0];
+      if('12345'.includes(c)) return 'Americas';
+      if('J'.includes(c)) return 'Asia';
+      if('SUVWXYZ'.includes(c)) return 'Europe';
+      return 'EMEA';
+    })();
+    return { make, model, yearRange:[yearBase-2, yearBase+2], region };
+  }
+
+  function showVINChips(scope, vinInfo){
+    const wrap = $('#'+scope+'-vinChips');
+    if(!wrap) return;
+    wrap.innerHTML = vinInfo? `
+      <span class="chip">VIN OK</span>
+      <span class="chip">Make: <b>${vinInfo.make}</b></span>
+      <span class="chip">Model: <b>${vinInfo.model}</b></span>
+      <span class="chip">Years: <b>${vinInfo.yearRange[0]}–${vinInfo.yearRange[1]}</b></span>
+      <span class="chip">Region: <b>${vinInfo.region}</b></span>
+    `: '';
+  }
+
+  function applyVINToFilters(scope){
+    const vin = $('#'+scope+'-vin')?.value.toUpperCase();
+    if(!vin) return;
+    if(!VIN_ALLOWED.test(vin)){
+      toast('VIN invalid: use 17 chars A–Z (except I,O,Q) and 0–9');
+      return;
+    }
+    const info = vinDecode(vin);
+    if(info){
+      $('#'+scope+'-make').value = info.make;
+      $('#'+scope+'-model').value = info.model;
+      $('#'+scope+'-year').value = String(info.yearRange[0]); // one bound as quick filter
+      showVINChips(scope, info);
+      toast('VIN decoded: applied make/year/model');
+    }
+  }
+
+  /* 7) Browse Parts (pagination, sorting) */
+  function renderBrowse(view){
+    const q = parseHashQuery();
+    // Merge filters from URL if present
+    try{
+      const patch = Object.assign({}, state.filters);
+      for(const k in q){
+        if(['page','sort','s'].includes(k)) continue;
+        let v = q[k];
+        if(v && v[0]==='{' || v && v[0]==='['){ try{ v = JSON.parse(v); }catch(_){ } }
+        patch[k]=v;
+      }
+      state.filters = patch;
+      saveFilters();
+    }catch(_){}
+
+    const content = document.createElement('div');
+    content.className='grid col-2';
+    content.innerHTML = `
+      <aside class="sidebar">
+        <div class="card">${filterPanelHTML('browse')}</div>
+      </aside>
+      <section>
+        <div class="card">
+          <div class="breadcrumbs">Home › Browse Parts</div>
+          <div class="results-head">
+            <div><h2>Parts</h2><div class="muted small" id="partsCount"></div></div>
+            <div style="display:flex; gap:8px; align-items:center">
+              <label for="sortSel" style="margin:0">Sort</label>
+              <select id="sortSel">
+                <option value="rel">Relevance</option>
+                <option value="price_asc">Price ↑</option>
+                <option value="price_desc">Price ↓</option>
+                <option value="rating_desc">Supplier Rating</option>
+                <option value="eta_asc">Delivery ETA</option>
+                <option value="stock_desc">Stock</option>
+              </select>
+              <button class="icon-btn" id="openDrawer" aria-label="Open filters">⚙︎</button>
+            </div>
+          </div>
+          <div class="chips" id="activeChips"></div>
+          <div id="partsGrid" class="grid-parts" style="margin-top:10px"></div>
+          <div id="pager" class="pager"></div>
+        </div>
+      </section>`;
+    view.innerHTML=''; view.appendChild(content);
+    // Apply events
+    $('#browse-apply').onclick = ()=>{
+      const nf = readFilters('browse'); state.filters = nf; saveFilters();
+      updateHashWithFilters('#browse', nf);
+      drawParts();
+    };
+    $('#browse-clear').onclick = ()=>{ state.filters={}; saveFilters(); updateHashWithFilters('#browse',{}); drawParts(); showVINChips('browse', null); };
+    $('#browse-export').onclick = ()=>exportFiltered('csv');
+    $('#browse-exportjson').onclick = ()=>exportFiltered('json');
+    $('#openDrawer').onclick = ()=>openDrawer();
+    $('#browse-vin').addEventListener('change', ()=>applyVINToFilters('browse'));
+    // vin chips initial
+    if(state.filters.vin && VIN_ALLOWED.test(state.filters.vin)) showVINChips('browse', vinDecode(state.filters.vin));
+
+    // search from hero if provided
+    const searchTerm = parseHashQuery().s || '';
+    $('#sortSel').value = parseHashQuery().sort || 'rel';
+
+    drawParts(searchTerm);
+
+    function exportFiltered(fmt){
+      const f = readFilters('browse');
+      const data = applyFiltersToParts(state.parts, f);
+      if(fmt==='json'){
+        const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+        const url = URL.createObjectURL(blob);
+        download(url, 'valkor-parts.json');
+        URL.revokeObjectURL(url);
+      } else { // csv
+        const rows = [['partId','title','vehicleType','make','model','yearFrom','yearTo','condition','stock','priceAED','supplierId']]
+          .concat(data.map(p=>[p.partId,p.title,p.vehicleType,p.make,p.model,p.yearRange[0],p.yearRange[1],p.condition,p.stock,p.priceAED,p.supplierId]));
+        const csv = rows.map(r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join('\\n');
+        const blob = new Blob([csv], {type:'text/csv'});
+        const url = URL.createObjectURL(blob);
+        download(url, 'valkor-parts.csv');
+        URL.revokeObjectURL(url);
+      }
+    }
+
+    function drawParts(searchTerm=''){
+      const f = readFilters('browse');
+      state.filters = f; saveFilters();
+      const term = (searchTerm || '').trim().toLowerCase();
+      let data = state.parts;
+      if(term){
+        data = data.filter(p=> (p.title.toLowerCase().includes(term) || p.make.toLowerCase().includes(term) || p.model.toLowerCase().includes(term) || p.partId.toLowerCase().includes(term)));
+      }
+      data = applyFiltersToParts(data, f);
+      // Sort
+      const sort = $('#sortSel').value;
+      if(sort==='price_asc') data.sort((a,b)=>a.priceAED-b.priceAED);
+      else if(sort==='price_desc') data.sort((a,b)=>b.priceAED-a.priceAED);
+      else if(sort==='rating_desc') data.sort((a,b)=>state.indexSupById[b.supplierId].rating - state.indexSupById[a.supplierId].rating);
+      else if(sort==='eta_asc') data.sort((a,b)=>etaMax(state.indexSupById[a.supplierId]) - etaMax(state.indexSupById[b.supplierId]));
+      else if(sort==='stock_desc') data.sort((a,b)=>b.stock-a.stock);
+      else { // relevance heuristic
+        data.sort((a,b)=>{
+          const sa = score(a), sb = score(b); return sb - sa;
+        });
+      }
+      function score(p){
+        let s=0;
+        if(f.make && p.make.toLowerCase().includes(f.make.toLowerCase())) s+=3;
+        if(f.model && p.model.toLowerCase().includes(f.model.toLowerCase())) s+=2;
+        if(f.year){ const y=Number(f.year)||0; if(y>=p.yearRange[0] && y<=p.yearRange[1]) s+=1.5; }
+        if(p.stock>0) s+=0.5;
+        if(state.indexSupById[p.supplierId].rating>4.2) s+=0.5;
+        return s;
+      }
+      $('#activeChips').innerHTML = activeFilterChipsHTML(f);
+      $all('#activeChips .chip').forEach(ch=>{
+        ch.querySelector('button').onclick = ()=>{ const k=ch.getAttribute('data-k'); state.filters[k]=''; saveFilters(); drawParts(term); updateHashWithFilters('#browse', state.filters); };
+      });
+
+      $('#partsCount').textContent = data.length + ' results';
+      // Pagination
+      const pageSize = 50;
+      const totalPages = Math.max(1, Math.ceil(data.length/pageSize));
+      const current = Math.max(1, Math.min(Number(parseHashQuery().page)||1, totalPages));
+      const pageData = data.slice((current-1)*pageSize, current*pageSize);
+      renderPartCards(pageData, $('#partsGrid'));
+      renderPager(current, totalPages, (p)=>{ updateHashWithFilters('#browse', Object.assign({}, f, {page:p, sort:$('#sortSel').value})); });
+      $('#sortSel').onchange = ()=>{ updateHashWithFilters('#browse', Object.assign({}, f, {page:1, sort:$('#sortSel').value})); drawParts(term); };
+    }
+
+    function renderPartCards(items, mount){
+      mount.innerHTML = items.map(p=>{
+        const sup = state.indexSupById[p.supplierId];
+        return `<div class="part-card">
+          <div class="part-img"><img src="${p.images[0]}" alt="Part image" style="max-width:95%; max-height:95%; border-radius:10px"></div>
+          <div class="part-body">
+            <div style="display:flex; justify-content:space-between; gap:8px">
+              <div style="font-weight:700">${escapeHtml(p.title)}</div>
+              <div class="price">${fmtAED(p.priceAED)}</div>
+            </div>
+            <div class="meta">
+              <div class="item">Years ${p.yearRange[0]}–${p.yearRange[1]}</div>
+              <div class="item">${escapeHtml(p.condition.toUpperCase())}</div>
+              <div class="item">${p.stock} in stock</div>
+            </div>
+            <div class="small muted">Supplier: <a href="#suppliers?s=${encodeURIComponent(sup.city)}&rating=0" data-supid="${sup.supplierId}" class="supLink">${escapeHtml(sup.name)}</a> • ⭐ ${sup.rating} • ETA ${escapeHtml(sup.deliveryEtaDays)}</div>
+            <div style="display:flex; gap:8px; margin-top:6px">
+              <button class="btn secondary view-sup" data-id="${sup.supplierId}">View Supplier</button>
+              <button class="btn add-cart" data-id="${p.partId}">Add to Cart</button>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+      $all('.view-sup', mount).forEach(b=>b.onclick = (e)=>openSupplierWindow(e.currentTarget.getAttribute('data-id')));
+      $all('.add-cart', mount).forEach(b=>b.onclick = (e)=>addToCart(e.currentTarget.getAttribute('data-id')));
+      $all('.supLink', mount).forEach(a=>a.onclick = (e)=>{ e.preventDefault(); openSupplierWindow(e.currentTarget.getAttribute('data-supid')); });
+    }
+
+    function etaMax(sup){
+      const m = /(\d+)\-(\d+)/.exec(sup.deliveryEtaDays); return m?Number(m[2]):7;
+    }
+  }
+
+  function renderPager(current, total, go){
+    const el = $('#pager');
+    if(!el) return;
+    let html = '';
+    function btn(p, label, disabled=false){
+      return `<button class="btn ${disabled?'secondary':''}" ${disabled?'disabled':''} data-p="${p}">${label}</button>`;
+    }
+    html += btn(1, '« First', current===1);
+    html += btn(Math.max(1,current-1), '‹ Prev', current===1);
+    html += `<span class="chip">Page ${current} / ${total}</span>`;
+    html += btn(Math.min(total, current+1), 'Next ›', current===total);
+    html += btn(total, 'Last »', current===total);
+    el.innerHTML = html;
+    $all('button', el).forEach(b=>b.onclick = ()=>go(Number(b.getAttribute('data-p'))));
+  }
+
+  /* 8) Suppliers Directory + Modal */
+  function renderSuppliers(view){
+    const q = parseHashQuery();
+    const sterm = (q.s||'').toLowerCase();
+    const minRating = Number(q.rating||'') || 0;
+    const countryQ = q.country || state.filters.country || '';
+    const cityQ = q.city || state.filters.city || '';
+    const content = document.createElement('div');
+    content.innerHTML = `
+      <div class="card">
+        <div class="breadcrumbs">Home › Suppliers</div>
+        <div class="filter-row">
+          <input class="input" id="supSearch" placeholder="Search by name, city…" value="${escapeHtml(sterm)}">
+          <select id="supCountry"><option value="">All Countries</option>${GCC_COUNTRIES.map(c=>`<option ${countryQ===c?'selected':''}>${c}</option>`).join('')}</select>
+        </div>
+        <div class="filter-row">
+          <input class="input" id="supCity" placeholder="City" value="${escapeHtml(cityQ)}">
+          <input class="input" id="supRating" placeholder="Min rating (e.g., 4)" value="${escapeHtml(minRating||'')}">
+        </div>
+        <div style="display:flex; gap:8px; margin-top:6px">
+          <button class="btn" id="supApply">Apply</button>
+          <button class="btn secondary" id="supClear">Clear</button>
+          <span class="muted small" id="supCount"></span>
+        </div>
+        <div id="supGrid" class="grid-sup" style="margin-top:12px"></div>
+        <div id="pager" class="pager"></div>
+      </div>`;
+    view.innerHTML=''; view.appendChild(content);
+
+    $('#supApply').onclick = ()=>{
+      const params = {
+        s: $('#supSearch').value.trim(),
+        rating: $('#supRating').value.trim(),
+        country: $('#supCountry').value,
+        city: $('#supCity').value.trim(),
+      };
+      const usp = new URLSearchParams();
+      for(const [k,v] of Object.entries(params)){ if(v) usp.set(k,v); }
+      location.hash = '#suppliers' + (usp.toString()?('?'+usp.toString()):'');
+    };
+    $('#supClear').onclick = ()=>{ location.hash = '#suppliers'; };
+
+    draw();
+
+    function draw(){
+      let data = state.suppliers;
+      if(sterm) data = data.filter(s=> (s.name.toLowerCase().includes(sterm) || s.city.toLowerCase().includes(sterm)));
+      if(minRating) data = data.filter(s=> s.rating >= minRating);
+      if(countryQ) data = data.filter(s=> s.country===countryQ);
+      if(cityQ) data = data.filter(s=> s.city.toLowerCase().includes(cityQ.toLowerCase()));
+      $('#supCount').textContent = data.length + ' suppliers';
+      // pagination
+      const pageSize = 30;
+      const totalPages = Math.max(1, Math.ceil(data.length/pageSize));
+      const current = Math.max(1, Math.min(Number(parseHashQuery().page)||1, totalPages));
+      const pageData = data.slice((current-1)*pageSize, current*pageSize);
+      $('#supGrid').innerHTML = pageData.map(s=>`
+        <div class="sup-card">
+          <div class="line"><div style="font-weight:800">${escapeHtml(s.name)}</div><span class="badge">⭐ ${s.rating}</span></div>
+          <div class="small muted">${escapeHtml(s.city)}, ${escapeHtml(s.country)} • Updated ${escapeHtml(s.lastUpdated)}</div>
+          <div class="chips">
+            ${s.categories.slice(0,4).map(c=>`<span class="chip">${escapeHtml(c)}</span>`).join('')}
+          </div>
+          <div class="line">
+            <div class="small">Payment: ${s.paymentMethods.join(', ')}</div>
+            <div class="small">ETA: ${escapeHtml(s.deliveryEtaDays)}</div>
+          </div>
+          <div style="display:flex; gap:8px">
+            <button class="btn secondary" data-id="${s.supplierId}" data-act="parts">View Parts</button>
+            <button class="btn" data-id="${s.supplierId}" data-act="profile">Open Supplier</button>
+          </div>
+        </div>
+      `).join('');
+      $all('.sup-card button').forEach(b=>b.onclick = ()=>{
+        const id = b.getAttribute('data-id'); const act = b.getAttribute('data-act');
+        if(act==='profile') openSupplierWindow(id); else { location.hash = '#browse?s='+encodeURIComponent(state.indexSupById[id].name); }
+      });
+      renderPager(current, totalPages, (p)=>{
+        const q = parseHashQuery();
+        q.page = p;
+        const usp = new URLSearchParams(q);
+        location.hash = '#suppliers?'+usp.toString();
+      });
+    }
+  }
+
+  // Supplier Window (modal)
+  let modalOpen=false, lastFocus=null;
+  function openSupplierWindow(id){
+    const s = state.indexSupById[id]; if(!s) return;
+    const bd = $('#modalBody'), tabs = $('#modalTabs'), title = $('#modalTitle');
+    title.textContent = s.name;
+    tabs.innerHTML = ['About','Parts','Policies','Contact'].map((t,i)=>`<button data-tab="${t}" class="${i===0?'active':''}">${t}</button>`).join('');
+    function drawTab(tab){
+      tabs.querySelectorAll('button').forEach(b=>b.classList.toggle('active', b.getAttribute('data-tab')===tab));
+      if(tab==='About'){
+        bd.innerHTML = `
+          <div class="chips"><span class="chip">⭐ ${s.rating}</span><span class="chip">${s.yearActive||s.yearsActive} years</span><span class="chip">Min order: ${s.minOrder} AED</span></div>
+          <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px">
+            <div class="card">
+              <h3>Profile</h3>
+              <p class="small muted">${escapeHtml(s.address)}</p>
+              <p class="small">City: <b>${escapeHtml(s.city)}</b> • Country: <b>${escapeHtml(s.country)}</b></p>
+              <p class="small">Categories: ${s.categories.map(c=>`<span class="chip">${escapeHtml(c)}</span>`).join(' ')}</p>
+              <p class="small">Ships to: ${s.shipTo.map(x=>`<span class="chip">${escapeHtml(x)}</span>`).join(' ')}</p>
+              <p class="small">Payment: ${s.paymentMethods.join(', ')}</p>
+            </div>
+            <div class="card">
+              <h3>Map (placeholder)</h3>
+              <img alt="Map placeholder" src="${svgDataUrl(s.city+' • '+COUNTRY_CODES[s.country])}" style="width:100%; border-radius:12px">
+            </div>
+          </div>`;
+      }
+      if(tab==='Parts'){
+        const parts = s.parts.slice(0,12).map(pid=>state.indexPartsById[pid]).filter(Boolean);
+        bd.innerHTML = '<div class="grid-parts">'+parts.map(p=>`
+          <div class="part-card">
+            <div class="part-img"><img src="${p.images[0]}" alt=""></div>
+            <div class="part-body">
+              <div style="display:flex; justify-content:space-between"><b>${escapeHtml(p.title)}</b><span class="price">${fmtAED(p.priceAED)}</span></div>
+              <div class="small muted">Stock ${p.stock} • ${p.condition.toUpperCase()} • ${p.yearRange[0]}–${p.yearRange[1]}</div>
+              <div style="display:flex; gap:8px; margin-top:6px">
+                <button class="btn add-cart" data-id="${p.partId}">Add to Cart</button>
+              </div>
+            </div>
+          </div>`).join('') + '</div>';
+        $all('.add-cart', bd).forEach(b=>b.onclick = ()=>addToCart(b.getAttribute('data-id')));
+      }
+      if(tab==='Policies'){
+        bd.innerHTML = `
+          <div class="acc">
+            <div class="acc-item open">
+              <button class="acc-btn">Returns & Warranty</button>
+              <div class="acc-panel"><p class="small">Policy: ${escapeHtml(s.returnsPolicy)}. Warranty coverage varies by item (see part details). OEM parts may include extended coverage.</p></div>
+            </div>
+            <div class="acc-item">
+              <button class="acc-btn">Shipping & Delivery</button>
+              <div class="acc-panel"><p class="small">Estimated delivery: ${escapeHtml(s.deliveryEtaDays)}. Shipping available across GCC and Iran. Customs fees may apply for cross-border shipments.</p></div>
+            </div>
+            <div class="acc-item">
+              <button class="acc-btn">Payments</button>
+              <div class="acc-panel"><p class="small">Accepted methods: ${s.paymentMethods.join(', ')}. Bank transfers must be settled within 3 business days.</p></div>
+            </div>
+          </div>`;
+        $all('.acc-btn', bd).forEach(btn=>btn.onclick = ()=> btn.parentElement.classList.toggle('open'));
+      }
+      if(tab==='Contact'){
+        bd.innerHTML = `
+          <div class="card">
+            <h3>Contact Supplier</h3>
+            <p>Email: <a href="mailto:${escapeHtml(s.contactEmail)}">${escapeHtml(s.contactEmail)}</a></p>
+            <p>Phone: <a href="tel:${escapeHtml(s.phone)}">${escapeHtml(s.phone)}</a></p>
+            <div style="display:flex; gap:8px; margin-top:8px">
+              <a class="btn" href="mailto:${escapeHtml(s.contactEmail)}?subject=Inquiry from Valkor">Email</a>
+              <a class="btn secondary" href="tel:${escapeHtml(s.phone)}">Call</a>
+            </div>
+          </div>`;
+      }
+    }
+    $all('button', $('#modalTabs')).forEach(_=>_.onclick = (e)=>drawTab(e.target.getAttribute('data-tab')));
+    drawTab('About');
+    openModal();
+  }
+
+  function openModal(){
+    const bd = $('#modalBackdrop');
+    if(modalOpen) return;
+    lastFocus = document.activeElement;
+    bd.classList.add('show');
+    bd.setAttribute('aria-hidden','false');
+    modalOpen=true;
+    // focus trap
+    const modal = bd.querySelector('.modal');
+    modal.focus();
+  }
+  function closeModal(){
+    const bd = $('#modalBackdrop');
+    if(!modalOpen) return;
+    bd.classList.remove('show');
+    bd.setAttribute('aria-hidden','true');
+    modalOpen=false;
+    if(lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  $('#modalClose').onclick = closeModal;
+  $('#modalBackdrop').addEventListener('click', (e)=>{ if(e.target.id==='modalBackdrop') closeModal(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modalOpen) closeModal(); });
+
+  /* 9) Cart & Checkout */
+  function addToCart(partId, qty=1){
+    const p = state.indexPartsById[partId]; if(!p){ toast('Item missing'); return; }
+    const inx = state.cart.findIndex(x=>x.partId===partId);
+    if(inx>-1) state.cart[inx].qty += qty;
+    else state.cart.push({ partId, qty });
+    saveCart();
+    toast('Added to cart');
+    // live badge? (skip for simplicity)
+  }
+  function removeFromCart(partId){
+    state.cart = state.cart.filter(x=>x.partId!==partId);
+    saveCart(); renderCart($('#view'));
+  }
+  function updateQty(partId, qty){
+    const it = state.cart.find(x=>x.partId===partId); if(!it) return;
+    it.qty = Math.max(1, qty|0); saveCart();
+    renderCart($('#view'));
+  }
+  function calcCart(){
+    let subtotal=0, items=[];
+    for(const it of state.cart){
+      const p = state.indexPartsById[it.partId]; if(!p) continue;
+      const line = { ...p, qty:it.qty, lineTotal: p.priceAED*it.qty };
+      items.push(line); subtotal += line.lineTotal;
+    }
+    const shipping = Math.round(subtotal*0.02)+25; // placeholder
+    const vat = Math.round(subtotal*0.05); // UAE 5%
+    const total = subtotal + shipping + vat;
+    return {items, subtotal, shipping, vat, total};
+  }
+
+  function renderCart(view){
+    const { items, subtotal, shipping, vat, total } = calcCart();
+    const content = document.createElement('div');
+    content.innerHTML = `
+      <div class="card">
+        <div class="breadcrumbs">Home › Cart</div>
+        <h2>Your Cart</h2>
+        ${items.length?`<div id="cartList">${items.map(i=>`
+          <div class="part-card" style="display:grid; grid-template-columns:120px 1fr auto; gap:8px; align-items:center">
+            <div class="part-img" style="height:90px"><img src="${i.images[0]}" alt=""></div>
+            <div class="part-body">
+              <b>${escapeHtml(i.title)}</b>
+              <div class="small muted">From: ${escapeHtml(state.indexSupById[i.supplierId].name)}</div>
+              <div class="small">Unit: ${fmtAED(i.priceAED)} • Stock ${i.stock}</div>
+            </div>
+            <div style="display:grid; gap:6px; justify-items:end; padding:10px">
+              <label>Qty <input class="input" type="number" min="1" value="${i.qty}" data-qty="${i.partId}" style="width:80px"></label>
+              <div><b>${fmtAED(i.lineTotal)}</b></div>
+              <button class="btn secondary" data-rem="${i.partId}">Remove</button>
+            </div>
+          </div>
+        `).join('')}</div>
+        <div class="card" style="margin-top:10px">
+          <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px">
+            <div>
+              <h3>Checkout</h3>
+              <div class="filter-row">
+                <div><label>Name</label><input class="input" id="coName"></div>
+                <div><label>Email</label><input class="input" id="coEmail"></div>
+              </div>
+              <div class="filter-row">
+                <div><label>Phone</label><input class="input" id="coPhone"></div>
+                <div><label>Country</label><select id="coCountry">
+                  ${['United Arab Emirates','Saudi Arabia','Kuwait','Qatar','Bahrain','Oman','Iran'].map(c=>`<option>${c}</option>`).join('')}
+                </select></div>
+              </div>
+              <div class="filter-row">
+                <div><label>City</label><input class="input" id="coCity"></div>
+                <div><label>Address</label><input class="input" id="coAddr"></div>
+              </div>
+              <button class="btn" id="placeOrder">Place Order</button>
+            </div>
+            <div>
+              <h3>Summary</h3>
+              <p class="small">Subtotal: <b>${fmtAED(subtotal)}</b></p>
+              <p class="small">Shipping (est.): <b>${fmtAED(shipping)}</b></p>
+              <p class="small">VAT (5%): <b>${fmtAED(vat)}</b></p>
+              <p><b>Total: ${fmtAED(total)}</b></p>
+            </div>
+          </div>
+        </div>`
+        : `<p class="muted">Your cart is empty.</p>`}
+      </div>`;
+    view.innerHTML=''; view.appendChild(content);
+    $all('[data-rem]').forEach(b=>b.onclick = ()=>removeFromCart(b.getAttribute('data-rem')));
+    $all('[data-qty]').forEach(inp=>inp.onchange = ()=>updateQty(inp.getAttribute('data-qty'), Number(inp.value)));
+    $('#placeOrder')?.addEventListener('click', ()=>{
+      const id = 'VAP-' + Date.now().toString(36).toUpperCase() + '-' + rand.int(1000,9999);
+      state.cart = []; saveCart();
+      view.innerHTML = `<div class="card"><h2>Order Confirmation</h2><p>Thanks! Your order ID is <span class="badge">${id}</span>.</p><p class="small muted">A confirmation email will be sent if this were a live system.</p><div><a class="btn" href="#browse">Continue Shopping</a></div></div>`;
+    });
+  }
+
+  /* 10) Portals */
+  function renderSell(view){
+    view.innerHTML = `
+    <div class="card">
+      <div class="breadcrumbs">Home › Sell on Valkor</div>
+      <h2>Supplier Onboarding</h2>
+      <p class="small muted">Join GCC's parts marketplace. Choose a package and upload your inventory (demo only).</p>
+      <div class="grid" style="grid-template-columns:repeat(3, 1fr)">
+        ${['Basic','Pro','Premium'].map((p,i)=>`
+          <div class="card">
+            <h3>${p}</h3>
+            <p class="small">${['Start selling with 50 listings','Grow with 500 listings and analytics','Unlimited listings + priority support'][i]}</p>
+            <p class="badge">${['99 AED/mo','299 AED/mo','799 AED/mo'][i]}</p>
+            <button class="btn secondary" data-plan="${p}">Choose ${p}</button>
+          </div>`).join('')}
+      </div>
+      <div class="card" style="margin-top:10px">
+        <h3>Upload Inventory (Mock)</h3>
+        <input type="file" class="input" aria-label="Upload CSV">
+        <p class="small muted">Accepts CSV/JSON (not actually uploaded).</p>
+      </div>
+    </div>`;
+    $all('[data-plan]').forEach(b=>b.onclick = ()=>toast('Selected plan: '+b.getAttribute('data-plan')));
+  }
+
+  function renderPortal(view){
+    view.innerHTML = `
+    <div class="card">
+      <div class="breadcrumbs">Home › Portal</div>
+      <h2>Customer Portal</h2>
+      <div class="grid" style="grid-template-columns:1fr 1fr">
+        <div class="card">
+          <h3>Orders</h3>
+          <p class="small muted">No orders yet (demo).</p>
+        </div>
+        <div class="card">
+          <h3>Saved VINs</h3>
+          <p class="small muted">Save VINs from Browse page using the <span class="kbd">VIN</span> field.</p>
+        </div>
+      </div>
+      <h2 style="margin-top:14px">Supplier Portal</h2>
+      <div class="grid" style="grid-template-columns:1fr 1fr">
+        <div class="card">
+          <h3>Analytics (sample)</h3>
+          <p class="small">Top city: <b>${topCity()}</b></p>
+          <p class="small">Avg rating: <b>${avgRating().toFixed(2)}</b></p>
+        </div>
+        <div class="card">
+          <h3>Inventory</h3>
+          <p class="small">You have <b>${state.parts.length}</b> parts in the marketplace.</p>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function renderAdmin(view){
+    const countsByCountry = Object.fromEntries(GCC_COUNTRIES.map(c=>[c,0]));
+    for(const s of state.suppliers){ countsByCountry[s.country]++; }
+    const countsByCategory = Object.fromEntries(CATEGORIES.map(c=>[c,0]));
+    for(const s of state.suppliers){ for(const c of s.categories) countsByCategory[c]++; }
+    const avg = avgRating();
+    view.innerHTML = `
+      <div class="card">
+        <div class="breadcrumbs">Home › Admin</div>
+        <h2>Admin Dashboard (Read-only Demo)</h2>
+        <div class="chips">
+          <span class="chip">Suppliers: ${state.suppliers.length}</span>
+          <span class="chip">Parts: ${state.parts.length}</span>
+          <span class="chip">Avg Rating: ${avg.toFixed(2)}</span>
+        </div>
+        <div class="grid" style="grid-template-columns:1fr 1fr">
+          <div class="card">
+            <h3>Suppliers by Country</h3>
+            ${Object.entries(countsByCountry).map(([c,v])=>`<div class="small">${c}: <b>${v}</b></div>`).join('')}
+          </div>
+          <div class="card">
+            <h3>Category Coverage</h3>
+            ${Object.entries(countsByCategory).map(([c,v])=>`<div class="small">${c}: <b>${v}</b></div>`).join('')}
+          </div>
+        </div>
+        <div class="card" style="margin-top:10px">
+          <h3>Error Log</h3>
+          <pre id="adminErr">${escapeHtml(errorLog.slice(-20).join('\\n')||'(empty)')}</pre>
+        </div>
+      </div>`;
+  }
+  function topCity(){
+    const map = Object.create(null);
+    for(const s of state.suppliers){ map[s.city]=(map[s.city]||0)+1; }
+    return Object.entries(map).sort((a,b)=>b[1]-a[1])[0]?.[0] || '—';
+  }
+  function avgRating(){ return state.suppliers.reduce((a,s)=>a+s.rating,0)/(state.suppliers.length||1); }
+
+  /* 11) Utils: Downloads, Toast, Drawer, Dev panel */
+  function download(url, name){
+    const a = document.createElement('a'); a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove();
+  }
+  const toastEl = $('#toast');
+  function toast(msg, ms=2000){
+    toastEl.textContent = msg; toastEl.classList.add('show');
+    setTimeout(()=>toastEl.classList.remove('show'), ms);
+  }
+  // Drawer
+  function openDrawer(){
+    $('#drawerFilters').innerHTML = filterPanelHTML('browse');
+    $('#drawer').classList.add('show'); $('#drawer').setAttribute('aria-hidden','false');
+    $('#drawerClose').onclick = closeDrawer;
+    // wire up drawer's buttons to main ones by triggering click on main apply/clear
+    $('#browse-apply', $('#drawer')).onclick = ()=>{ state.filters = readFilters('browse'); saveFilters(); updateHashWithFilters('#browse', state.filters); closeDrawer(); router(); };
+    $('#browse-clear', $('#drawer')).onclick = ()=>{ state.filters={}; saveFilters(); closeDrawer(); updateHashWithFilters('#browse',{}); router(); };
+    $('#browse-vin', $('#drawer')).addEventListener('change', ()=>applyVINToFilters('browse'));
+  }
+  function closeDrawer(){ $('#drawer').classList.remove('show'); $('#drawer').setAttribute('aria-hidden','true'); }
+
+  // Dev Panel
+  $('#toggleDev').onclick = ()=>$('#devPanel').classList.toggle('show');
+  $('#regen').onclick = async ()=>{
+    const newSeed = Number($('#seedInput').value)||state.seed;
+    rand.reseed(newSeed);
+    await generateDataset(); updateDev(); router(); toast('Dataset regenerated'); setSeedBadges();
+  };
+  $('#dump').onclick = ()=>{ const b = new Blob([JSON.stringify(state.filters,null,2)],{type:'application/json'}); const u = URL.createObjectURL(b); download(u,'filters.json'); URL.revokeObjectURL(u); };
+  function updateDev(){
+    $('#devSeed').textContent = state.seed; $('#devSup').textContent = state.suppliers.length; $('#devParts').textContent = state.parts.length;
+  }
+  function setSeedBadges(){
+    $('#seedRead').textContent = state.seed; $('#year').textContent = new Date().getFullYear();
+  }
+
+  /* 12) Views: Home & Help */
+  function renderHome(view){
+    view.innerHTML = `
+      <div class="grid" style="grid-template-columns:1fr 1fr">
+        <div class="card">
+          <h2>Start Browsing</h2>
+          <p class="small">Use the global search above or go to <a href="#browse">Browse Parts</a>. Apply filters for make/model, year, condition, and more.</p>
+          <div class="chips">
+            <span class="chip">10,000+ parts</span>
+            <span class="chip">1,500+ suppliers</span>
+            <span class="chip">GCC + Iran shipping</span>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Supplier Directory</h2>
+          <p class="small">Find vetted suppliers across the UAE, KSA, Kuwait, Qatar, Bahrain, and Oman.</p>
+          <a class="btn" href="#suppliers">Open Directory</a>
+        </div>
+        <div class="card">
+          <h2>Sell on Valkor</h2>
+          <p class="small">Onboard in minutes. Choose a package and upload your inventory.</p>
+          <a class="btn secondary" href="#sell">Get Started</a>
+        </div>
+        <div class="card">
+          <h2>Admin & Analytics</h2>
+          <p class="small">Demo-only analytics for this local dataset.</p>
+          <a class="btn secondary" href="#admin">Open Admin</a>
+        </div>
+      </div>`;
+  }
+
+  function renderHelp(view){
+    view.innerHTML = `
+      <div class="card">
+        <div class="breadcrumbs">Home › Help</div>
+        <h2>Help & FAQ</h2>
+        <div class="acc" style="margin-top:8px">
+          <div class="acc-item open">
+            <button class="acc-btn">How do VIN rules work?</button>
+            <div class="acc-panel"><p class="small">VIN must be exactly 17 characters using digits and capital letters A–Z except I, O, Q. Enter a valid VIN to auto-fill make and a year range.</p></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn">Where do you ship?</button>
+            <div class="acc-panel"><p class="small">Suppliers ship across the GCC (UAE, KSA, Kuwait, Qatar, Bahrain, Oman) and to Iran.</p></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn">Supplier packages</button>
+            <div class="acc-panel"><p class="small">Basic (99 AED/mo), Pro (299 AED/mo), Premium (799 AED/mo). All plans include marketplace access and support.</p></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn">Blank page safety</button>
+            <div class="acc-panel"><p class="small">We render a loading state and catch errors globally. If something breaks, you'll see a friendly message and a Reload button.</p></div>
+          </div>
+        </div>
+      </div>`;
+    $all('.acc-btn', view).forEach(btn=>btn.onclick = ()=> btn.parentElement.classList.toggle('open'));
+  }
+
+  /* 13) Wire up global header, hero */
+  $('#hamb').onclick = ()=>{
+    const m = $('#mmenu'); const open = m.style.display!=='block'; $('#hamb').setAttribute('aria-expanded', String(open));
+    m.style.display = open?'block':'none';
+  };
+  $('#heroGo').onclick = ()=>{
+    const term = $('#heroSearch').value.trim();
+    location.hash = '#browse' + (term?('?s='+encodeURIComponent(term)):''); 
+  };
+  $('#heroSearch').addEventListener('input', (e)=>{
+    const v = e.target.value.trim().toUpperCase();
+    if(v.length===17){
+      if(VIN_ALLOWED.test(v)){ const info = vinDecode(v); showVINChips('hero', info); }
+      else showVINChips('hero', null);
+    } else { $('#vinChipWrap').innerHTML=''; }
+  });
+
+  /* 14) Init — generate dataset then route */
+  (async function init(){
+    setSeedBadges();
+    updateDev();
+    await generateDataset(1500, 10000);
+    updateDev();
+    // After generation, route
+    router();
+  })();
+
+  // Hash routing
+  window.addEventListener('hashchange', router);
+
+})(); // end IIFE
+</script>
+
+<script>
+(function(){
+  // Lightweight, self-contained logic to auto-scroll the embedded presentation if allowed.
+  const frame = document.getElementById('vpFrame');
+  const note = document.getElementById('vpNote');
+  const toggle = document.getElementById('vpToggle');
+  const retry = document.getElementById('vpRetry');
+  if(!frame || !toggle || !retry) return;
+  let auto = true, timer = null;
+
+  function tryAutoScroll(){
+    clearInterval(timer);
+    if(!auto) return;
+    timer = setInterval(()=>{
+      try{
+        // Attempt gentle scroll; cross-origin hosts may block scripted control.
+        if(frame.contentWindow) frame.contentWindow.scrollBy(0, 1);
+      }catch(e){
+        if(note && !note.dataset.shown){
+          note.dataset.shown = '1';
+          note.textContent = 'Auto-scroll is limited because the host blocks scripted scrolling in embeds. You can still read the presentation here.';
+        }
+        clearInterval(timer);
+      }
+    }, 40);
+  }
+  toggle.addEventListener('click', ()=>{
+    auto = !auto;
+    toggle.textContent = 'Auto-scroll: ' + (auto? 'On' : 'Off');
+    toggle.setAttribute('aria-pressed', String(auto));
+    tryAutoScroll();
+  });
+  retry.addEventListener('click', ()=>{
+    const url = frame.getAttribute('src');
+    frame.setAttribute('src', url);
+    setTimeout(tryAutoScroll, 800);
+  });
+  frame.addEventListener('load', tryAutoScroll);
+  // Soft hint if totally blocked
+  setTimeout(()=>{
+    if(frame.clientHeight === 0 && note){
+      note.textContent = 'If you do not see the presentation, the host has blocked embedding.';
+    }
+  }, 2500);
+})();
+</script>
+
+</body>
+</html>
